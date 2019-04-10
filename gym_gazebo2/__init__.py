@@ -9,6 +9,13 @@ register(
 )
 
 register(
+    id='MARARand-v0',
+    entry_point='gym_gazebo2.envs.MARA:MARARandEnv',
+)
+
+
+
+register(
     id='MARAReal-v0',
     entry_point='gym_gazebo2.envs.MARA:MARARealEnv',
 )
