@@ -21,12 +21,13 @@ RUN \
         git \
         python3-colcon-common-extensions \
         python3-pip \
+        python3-vcstool \
         wget \
       &&  pip3 install \
-          tensorflow==1.12 \
-          transforms3d \
-          billiard \
-          psutil \
+        tensorflow==1.12 \
+        transforms3d \
+        billiard \
+        psutil \
       && apt update -qq && apt install -qq -y \
         python3-colcon-common-extensions \
         python3-vcstool \
@@ -60,10 +61,11 @@ RUN \
       && cd /root/ && git clone https://github.com/ros/urdf_parser_py.git -b melodic-devel && cd /root/urdf_parser_py && pip3 install -e . \
       && cd /root && git clone https://github.com/openai/gym && cd /root/gym && pip3 install -e . \
       #gym-gazebo2
-      && cd /root && git clone https://github.com/AcutronicRobotics/gym-gazebo2 && cd /root/gym-gazebo2 && pip3 install -e . \
+        && cd /root && git clone https://github.com/AcutronicRobotics/gym-gazebo2 && cd /root/gym-gazebo2 && pip3 install -e . \
       #Load provisioning script
       && echo 'source /root/gym-gazebo2/provision/mara_setup.sh' >> ~/.bashrc \
       "
+COPY run_environment.sh /
 WORKDIR /root/gym-gazebo2/
 EXPOSE 11596
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["/run_environment.sh"]
